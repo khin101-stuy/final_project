@@ -1,15 +1,15 @@
-public abstract class Characters
+public class Characters
 {
-  private int speed;
-  private int hp;
-  private int damage;
-  private int stamina;
-  Characters(int s, int h, int d, int st)
+  public int speed;
+  public int hp;
+  public int damage;
+  public int stamina;
+  public Characters()
   {
-    speed = s;
-    hp = h;
-    damage = d;
-    stamina = st;
+    int speed;
+    int hp;
+    int damage;
+    int stamina;
   }
   
   
