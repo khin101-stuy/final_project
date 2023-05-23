@@ -78,6 +78,7 @@ void keyPressed() {
 int curPlayerSelect = 1;
 void mousePressed() // this will be used to detect which character is selected
 {
+ if ( ! (menuScreen || battle))
   if (curPlayerSelect == 1)
   {
     if (mouseX > 0 && mouseX < 256 && mouseY > 0 && mouseY < 256)
@@ -86,6 +87,7 @@ void mousePressed() // this will be used to detect which character is selected
       charOne = new Jake(Player1StartPos);
       curPlayerSelect = 2;
       battle = true;
+      scale(-1,1);
     }
   }
 }
