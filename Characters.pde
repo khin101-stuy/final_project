@@ -6,6 +6,7 @@ public class Characters
   public int stamina;
   public PVector pos;
   public PImage sprite;
+  public PImage attack;
   public Characters()
   {
     int speed;

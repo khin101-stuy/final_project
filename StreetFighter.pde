@@ -6,7 +6,7 @@ boolean menuScreen = true;
 boolean battle = false;
 String selectedChar1 = "";
 PVector Player1StartPos = new PVector (100, 360);
-Characters charOne;
+Characters charOne, charTwo;
 
 // handle the loading of sprites and backgrounds and what characters to be selected
 void setup()
@@ -23,6 +23,7 @@ void setup()
 
 
 // handle the drawing of the characters their attacks, and the ui
+boolean charOneAttackState = false;
 void draw()
 {
   System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
@@ -42,7 +43,15 @@ void draw()
   if (battle)
   {
     image(map, 0, 0);
-    image(charOne.sprite, charOne.pos.x, charOne.pos.y);
+    if (! charOneAttackState)
+    {
+      image(charOne.sprite, charOne.pos.x, charOne.pos.y);
+    }
+    if (charOneAttackState)
+    {
+      image(map, 0, 0);
+      image(charOne.attack, charOne.pos.x, charOne.pos.y);
+    }
   }
 }
 
@@ -52,6 +61,7 @@ void keyPressed() {
   menuScreen = false;  // press any key to move to character select screen
   if (battle)
   {
+    // movement
     if ( key == CODED) {
       if (keyCode == UP) {
         if (350 < charOne.pos.y)
@@ -64,7 +74,7 @@ void keyPressed() {
         }
       }
       if (keyCode == LEFT) {
-         if (0 < charOne.pos.x)
+        if (0 < charOne.pos.x)
           charOne.pos.add(-20, 0);
       }
       if (keyCode == RIGHT) {
@@ -72,22 +82,34 @@ void keyPressed() {
           charOne.pos.add(20, 0);
       }
     }
+    // attacks
+    if (key == 'n')
+    {
+      charOneAttackState = true;
+      try {
+        Thread.sleep(2000);
+      }
+      catch(InterruptedException e) {
+        System.out.println("got interrupted!");
+      }
+      charOneAttackState = false;
+    }
   }
 }
 
 int curPlayerSelect = 1;
 void mousePressed() // this will be used to detect which character is selected
 {
- if ( ! (menuScreen || battle))
-  if (curPlayerSelect == 1)
-  {
-    if (mouseX > 0 && mouseX < 256 && mouseY > 0 && mouseY < 256)
+  if ( ! (menuScreen || battle))
+    if (curPlayerSelect == 1)
     {
-      selectedChar1 = "Jake";
-      charOne = new Jake(Player1StartPos);
-      curPlayerSelect = 2;
-      battle = true;
-      scale(-1,1);
+      if (mouseX > 0 && mouseX < 256 && mouseY > 0 && mouseY < 256)
+      {
+        selectedChar1 = "Jake";
+        charOne = new Jake(Player1StartPos);
+        curPlayerSelect = 2;
+        battle = true;
+        scale(-1, 1);
+      }
     }
-  }
 }
