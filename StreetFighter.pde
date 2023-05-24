@@ -1,3 +1,4 @@
+import java.util.concurrent.TimeUnit;
 PImage map;
 PImage char1;
 PImage menu;
@@ -51,11 +52,18 @@ void draw()
     {
       image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
+      //try {
+
+      //  Thread.sleep(500);
+      //}
+      //catch(InterruptedException e) {
+      //  System.out.println("got interrupted!");
+      //}
     }
   }
-}
+  }
 
-// handle th eocntrol scheme
+// handle then control scheme
 void keyPressed() {
   // movement
   menuScreen = false;  // press any key to move to character select screen
@@ -86,13 +94,6 @@ void keyPressed() {
     if (key == 'n')
     {
       charOneAttackState = true;
-      try {
-        Thread.sleep(2000);
-      }
-      catch(InterruptedException e) {
-        System.out.println("got interrupted!");
-      }
-      charOneAttackState = false;
     }
   }
 }
@@ -112,4 +113,11 @@ void mousePressed() // this will be used to detect which character is selected
         scale(-1, 1);
       }
     }
+}
+void keyReleased()
+{
+  if (key == 'n')
+  {
+    charOneAttackState = false;
+  }
 }
