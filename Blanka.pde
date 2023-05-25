@@ -9,7 +9,7 @@ public class Blanka extends Characters
     stamina = 75;
     sprite = loadImage("Screen_Shot_2023-05-25_at_12.47.21_PM-removebg-preview.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
-    attack = loadImage("Jakeattack.png");
+    attack = loadImage("Screen_Shot_2023-05-25_at_12.47.46_PM-removebg-preview.png");
     attack.resize(attack.width * 3, attack.height * 3);
   }
   public Blanka(PVector position)
@@ -22,7 +22,7 @@ public class Blanka extends Characters
     sprite = loadImage("Screen_Shot_2023-05-25_at_12.47.21_PM-removebg-preview.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
     pos = position;
-    attack = loadImage("Jakeattack.png");
+    attack = loadImage("Screen_Shot_2023-05-25_at_12.47.46_PM-removebg-preview.png");
     attack.resize(attack.width * 3, attack.height * 3);
   }
 }
