@@ -69,28 +69,46 @@ void keyPressed() {
   if (battle)
   {
     // movement
-    if ( key == CODED) {
-      if (keyCode == UP) {
-        if (587 - charOne.sprite.height < charOne.pos.y) // make this be respective to character height like the other ones
+      if (key == 'W' || key == 'w') {
+        if (587 - charOne.sprite.height < charOne.pos.y) 
           charOne.pos.add(0, -20);
       }
-      if (keyCode == DOWN) {
+      if (key == 'S' || key == 's') {
         if (height - charOne.sprite.height > charOne.pos.y)
         {
           charOne.pos.add(0, 20);
         }
       }
-      if (keyCode == LEFT) {
+      if (key == 'A' || key == 'a') {
         if (0 < charOne.pos.x)
           charOne.pos.add(-20, 0);
       }
-      if (keyCode == RIGHT) {
+      if (key == 'D' || key == 'd') {
         if (width > charOne.pos.x + charOne.sprite.width)
           charOne.pos.add(20, 0);
       }
-    }
+    //if ( key == CODED) {
+    //  if (keyCode == UP) {
+    //    if (587 - charOne.sprite.height < charOne.pos.y) // make this be respective to character height like the other ones
+    //      charOne.pos.add(0, -20);
+    //  }
+    //  if (keyCode == DOWN) {
+    //    if (height - charOne.sprite.height > charOne.pos.y)
+    //    {
+    //      charOne.pos.add(0, 20);
+    //    }
+    //  }
+    //  if (keyCode == LEFT) {
+    //    if (0 < charOne.pos.x)
+    //      charOne.pos.add(-20, 0);
+    //  }
+    //  if (keyCode == RIGHT) {
+    //    if (width > charOne.pos.x + charOne.sprite.width)
+    //      charOne.pos.add(20, 0);
+    //  }
+      
     // attacks
-    if (key == 'n')
+    if (key == 'q')
     {
       charOneAttackState = true;
     }
