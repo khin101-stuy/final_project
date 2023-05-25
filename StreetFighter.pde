@@ -2,11 +2,11 @@ import java.util.concurrent.TimeUnit;
 PImage map;
 PImage char1;
 PImage menu;
-PImage JakeSelect, DaveSelect, LouisSelect;
+PImage JakeSelect, BlankaSelect, LouisSelect;
 boolean menuScreen = true;
 boolean battle = false;
 String selectedChar1 = "";
-PVector Player1StartPos = new PVector (100, 360);
+PVector Player1StartPos = new PVector(0, 0);
 Characters charOne, charTwo;
 
 // handle the loading of sprites and backgrounds and what characters to be selected
@@ -21,6 +21,10 @@ void setup()
 
   JakeSelect = loadImage("sprite1.png");
   JakeSelect.resize(JakeSelect.width * 2, JakeSelect.height * 2);
+  
+  BlankaSelect = loadImage("Screen_Shot_2023-05-25_at_12.47.21_PM-removebg-preview.png");
+  BlankaSelect.resize(BlankaSelect.width / 2, BlankaSelect.height / 2);
+ 
 }
 
 
@@ -41,6 +45,7 @@ void draw()
   {
     background(0, 0, 0);
     image(JakeSelect, 30, 50);
+    image(BlankaSelect, 150, 10);
   }
   if (battle)
   {
@@ -53,13 +58,6 @@ void draw()
     {
       image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
-      //try {
-
-      //  Thread.sleep(500);
-      //}
-      //catch(InterruptedException e) {
-      //  System.out.println("got interrupted!");
-      //}
     }
   }
   }
@@ -73,7 +71,7 @@ void keyPressed() {
     // movement
     if ( key == CODED) {
       if (keyCode == UP) {
-        if (350 < charOne.pos.y)
+        if (587 - charOne.sprite.height < charOne.pos.y) // make this be respective to character height like the other ones
           charOne.pos.add(0, -20);
       }
       if (keyCode == DOWN) {
@@ -109,10 +107,22 @@ void mousePressed() // this will be used to detect which character is selected
       {
         selectedChar1 = "Jake";
         charOne = new Jake(Player1StartPos);
+        charOne.pos.set(0, 587 - charOne.sprite.height);
         curPlayerSelect = 2;
         battle = true;
         scale(-1, 1);
       }
+      if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256)
+      {
+        selectedChar1 = "Blanka";
+        charOne = new Blanka(Player1StartPos);
+        charOne.pos.set(0, 587 - charOne.sprite.height);
+        curPlayerSelect = 2;
+        battle = true;
+        scale(-1, 1);
+        
+      }
+      
     }
 }
 void keyReleased()
