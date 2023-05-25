@@ -12,6 +12,7 @@ Characters charOne, charTwo;
 // handle the loading of sprites and backgrounds and what characters to be selected
 void setup()
 {
+  frameRate(60);
   size(384*3, 224*3);
   menu = loadImage("menu.png");
   menu.resize(384*3, 224*3);
@@ -76,7 +77,7 @@ void keyPressed() {
           charOne.pos.add(0, -20);
       }
       if (keyCode == DOWN) {
-        if (464 > charOne.pos.y)
+        if (height - charOne.sprite.height > charOne.pos.y)
         {
           charOne.pos.add(0, 20);
         }
