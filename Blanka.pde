@@ -1,24 +1,24 @@
-public class Jake extends Characters
+public class Blanka extends Characters
 {
-  public Jake()
+  public Blanka()
   {
     super();
-    speed = 50;
-    hp = 100;
-    damage = 25;
-    stamina = 100;
+    speed = 25;
+    hp = 200;
+    damage = 40;
+    stamina = 75;
     sprite = loadImage("sprite1.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
     attack = loadImage("Jakeattack.png");
     attack.resize(attack.width * 3, attack.height * 3);
   }
-  public Jake(PVector position)
+  public Blanka(PVector position)
   {
     super();
-    speed = 50;
-    hp = 100;
-    damage = 25;
-    stamina = 100;
+    speed = 25;
+    hp = 200;
+    damage = 40;
+    stamina = 75;
     sprite = loadImage("sprite1.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
     pos = position;
