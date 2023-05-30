@@ -120,21 +120,21 @@ void keyPressed() {
   {
     // movement
     if (key == 'W' || key == 'w') {
-      if (587 - charOne.sprite.height < charOne.pos.y)
+      //if (587 - charOne.sprite.height < charOne.pos.y)
         w = true;
     }
     if (key == 'S' || key == 's') {
-      if (height - charOne.sprite.height > charOne.pos.y)
+      //if (height - charOne.sprite.height > charOne.pos.y)
       {
         s = true;
       }
     }
     if (key == 'A' || key == 'a') {
-      if (0 < charOne.pos.x)
+     // if (0 < charOne.pos.x)
         a = true;
     }
     if (key == 'D' || key == 'd') {
-      if (width > charOne.pos.x + charOne.sprite.width)
+      //if (width > charOne.pos.x + charOne.sprite.width)
         d = true;
     }
     if ( key == CODED) {
