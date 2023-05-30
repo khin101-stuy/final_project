@@ -25,7 +25,10 @@ public class Characters
   }
   void moveUp()
   {
-    pos.add(0, -20 * speed);
+    if (587 - sprite.height - 20*speed  < pos.y -  20*speed)
+      {
+        pos.add(0, -20 * speed);
+      }
   }
   void moveDown()
   {

@@ -118,25 +118,32 @@ void keyPressed() {
   menuScreen = false;  // press any key to move to character select screen
   if (battle)
   {
+    
     // movement
     if (key == 'W' || key == 'w') {
-      //if (587 - charOne.sprite.height < charOne.pos.y)
+      if (587 - charOne.sprite.height  < charOne.pos.y -  20*charOne.speed)
+      {
         w = true;
+      }
+    else w = false;
     }
     if (key == 'S' || key == 's') {
-      //if (height - charOne.sprite.height > charOne.pos.y)
-      {
+     if (height - charOne.sprite.height > charOne.pos.y + 20*charOne.speed)
+     {
         s = true;
-      }
+     }
+     else s = false;
+  
     }
     if (key == 'A' || key == 'a') {
-     // if (0 < charOne.pos.x)
+     if (0 < charOne.pos.x - 20*charOne.speed)
         a = true;
     }
     if (key == 'D' || key == 'd') {
-      //if (width > charOne.pos.x + charOne.sprite.width)
+     if (width > charOne.pos.x + charOne.sprite.width + 20*charOne.speed)
         d = true;
     }
+    // plyr2 controls
     if ( key == CODED) {
       if (keyCode == UP) {
         if (587 - charTwo.sprite.height < charTwo.pos.y) // make this be respective to character height like the other ones
@@ -156,23 +163,6 @@ void keyPressed() {
         if (width > charTwo.pos.x + charTwo.sprite.width)
           right = true;
       }
-    }
-    // movement constraints
-    if (!(587 - charOne.sprite.height < charOne.pos.y))
-    {
-      w = false;
-    }
-    if (!(height - charOne.sprite.height > charOne.pos.y))
-    {
-      s = false;
-    }
-    if (!(0 < charOne.pos.x))
-    {
-      a = false;
-    }
-    if (! (width > charOne.pos.x + charOne.sprite.width))
-    {
-      d = false;
     }
 
 
