@@ -3,7 +3,7 @@ public class Blanka extends Characters
   public Blanka()
   {
     super();
-    speed = 25;
+    speed = 0.7;
     hp = 200;
     damage = 40;
     stamina = 75;
@@ -15,7 +15,7 @@ public class Blanka extends Characters
   public Blanka(PVector position)
   {
     super();
-    speed = 25;
+    speed = 0.7;
     hp = 200;
     damage = 40;
     stamina = 75;

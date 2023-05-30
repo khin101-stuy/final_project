@@ -1,6 +1,6 @@
 public class Characters
 {
-  public int speed;
+  public float speed;
   public int hp;
   public int damage;
   public int stamina;
@@ -15,7 +15,22 @@ public class Characters
     int stamina;
     int pos;
   }
-  
+  void moveLeft()
+  {
+    pos.add(-20 * speed, 0);
+  }
+  void moveRight()
+  {
+    pos.add(20 * speed, 0);
+  }
+  void moveUp()
+  {
+    pos.add(0, -20 * speed);
+  }
+  void moveDown()
+  {
+    pos.add(0, 20 * speed);
+  }
   
   
 }
