@@ -3,9 +3,9 @@ public class Curry extends Characters
   public Curry()
   {
     super();
-    speed = 65;
+    speed = 2;
     hp = 100;
-    damage = 20;
+    damage = 15;
     stamina = 120;
     sprite = loadImage("Screen Shot 2023-05-30 at 12.52.15 PM.png");
     sprite.resize(sprite.width * 4 / 5, sprite.height * 4 / 5);
