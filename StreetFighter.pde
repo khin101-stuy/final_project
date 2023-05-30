@@ -33,9 +33,12 @@ void setup()
 // handle the drawing of the characters their attacks, and the ui
 boolean charOneAttackState = false;
 boolean charTwoAttackState = false;
+long charOneNextAvaliable = 0;
+long charTwoNextAvaliable = 0;
 void draw()
 {
-  System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
+  long curTime = System.currentTimeMillis();
+//  System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
   if (menuScreen == true)
   {
 
@@ -55,23 +58,49 @@ void draw()
   if (battle)
   {
     image(map, 0, 0);
-    if (! charOneAttackState)
-    {
-      image(charOne.sprite, charOne.pos.x, charOne.pos.y);
-    }
-    if (charOneAttackState)
+    //if (! charOneAttackState )
+    //{
+    //  image(charOne.sprite, charOne.pos.x, charOne.pos.y);
+    //}
+    if (charOneAttackState && curTime >= charOneNextAvaliable)
     {
       image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
+      charOneNextAvaliable = curTime + 625;
+      if(charOne.pos.x + charOne.attack.width >= charTwo.pos.x)
+      {
+        charTwo.hp += (-1 * charOne.damage);
+        System.out.println(charTwo.hp);
+      }
+      
     }
-    if (! charTwoAttackState)
+    else 
     {
-      image(charTwo.sprite, charTwo.pos.x, charTwo.pos.y);
+      if(curTime < charOneNextAvaliable - 500)
+      {image(charOne.attack, charOne.pos.x, charOne.pos.y);
+      }
+      else 
+      image(charOne.sprite, charOne.pos.x, charOne.pos.y);
     }
-    if (charTwoAttackState)
+    
+    if (charTwoAttackState && curTime >= charTwoNextAvaliable)
     {
-      image(map, 0, 0);
       image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+      charTwoNextAvaliable = curTime + 625;
+      if(charTwo.pos.x + charTwo.attack.width >= charTwo.pos.x)
+      {
+        charOne.hp += (-1 * charTwo.damage);
+        System.out.println(charTwo.hp);
+      }
+      
+    }
+    else 
+    {
+      if(curTime < charTwoNextAvaliable - 500)
+      {image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+      }
+      else 
+      image(charTwo.sprite, charTwo.pos.x, charTwo.pos.y);
     }
 
     // movement vector handling
@@ -108,8 +137,8 @@ void draw()
     {
       charTwo.moveRight();
     }
+    }
   }
-}
 
 // handle then control scheme
 Boolean left = false, right = false, up = false, down = false, w = false, s = false, a = false, d = false;
@@ -161,6 +190,11 @@ void keyPressed() {
     {
       charOneAttackState = true;
     }
+  
+   if (key == '.')
+   {
+     charTwoAttackState = true;
+   }
   }
 }
 
@@ -250,5 +284,9 @@ void keyReleased()
   if (key == 'q')
   {
     charOneAttackState = false;
+  }
+  if (key == '.')
+  {
+    charTwoAttackState = false;
   }
 }
