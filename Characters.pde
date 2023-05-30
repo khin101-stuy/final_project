@@ -17,22 +17,27 @@ public class Characters
   }
   void moveLeft()
   {
-    pos.add(-20 * speed, 0);
+    if (0 < pos.x - 15*speed/frameRate)
+    pos.add(-15 * speed, 0);
   }
   void moveRight()
   {
-    pos.add(20 * speed, 0);
+    if (width > pos.x + sprite.width + 15*speed/frameRate)
+    pos.add(15 * speed, 0);
   }
   void moveUp()
   {
-    if (587 - sprite.height - 20*speed  < pos.y -  20*speed)
+    if (587 - sprite.height  < pos.y -  15*speed / frameRate)
       {
-        pos.add(0, -20 * speed);
+        pos.add(0, -15 * speed);
       }
   }
   void moveDown()
   {
-    pos.add(0, 20 * speed);
+    if (height - sprite.height > pos.y + 15*speed / frameRate)
+     {
+        pos.add(0, 15 * speed);
+     }
   }
   
   

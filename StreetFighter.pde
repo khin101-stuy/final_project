@@ -118,50 +118,40 @@ void keyPressed() {
   menuScreen = false;  // press any key to move to character select screen
   if (battle)
   {
-    
+
     // movement
     if (key == 'W' || key == 'w') {
-      if (587 - charOne.sprite.height  < charOne.pos.y -  20*charOne.speed)
-      {
-        w = true;
-      }
-    else w = false;
+      w = true;
     }
     if (key == 'S' || key == 's') {
-     if (height - charOne.sprite.height > charOne.pos.y + 20*charOne.speed)
-     {
-        s = true;
-     }
-     else s = false;
-  
+      s = true;
     }
     if (key == 'A' || key == 'a') {
-     if (0 < charOne.pos.x - 20*charOne.speed)
-        a = true;
+
+      a = true;
     }
     if (key == 'D' || key == 'd') {
-     if (width > charOne.pos.x + charOne.sprite.width + 20*charOne.speed)
-        d = true;
+
+      d = true;
     }
     // plyr2 controls
     if ( key == CODED) {
       if (keyCode == UP) {
-        if (587 - charTwo.sprite.height < charTwo.pos.y) // make this be respective to character height like the other ones
-          up = true;
+
+        up = true;
       }
       if (keyCode == DOWN) {
-        if (height - charTwo.sprite.height > charTwo.pos.y)
-        {
-          down = true;
-        }
+
+
+        down = true;
       }
       if (keyCode == LEFT) {
-        if (0 < charTwo.pos.x)
-          left = true;
+
+        left = true;
       }
       if (keyCode == RIGHT) {
-        if (width > charTwo.pos.x + charTwo.sprite.width)
-          right = true;
+
+        right = true;
       }
     }
 
@@ -185,8 +175,7 @@ void mousePressed() // this will be used to detect which character is selected
       {
         selectedChar1 = "Ken";
         charOne = new Ken(Player1StartPos);
-       // charOne.pos.set(0, 587 - charOne.sprite.height);
-       charOne.pos.set(155, 367);
+        charOne.pos.set(0, 587 - charOne.sprite.height);
         curPlayerSelect = 2;
       }
       if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256)
