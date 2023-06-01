@@ -1,7 +1,7 @@
 public class Characters
 {
   public float speed;
-  public int hp;
+  public float hp;
   public int damage;
   public int stamina;
   public PVector pos;

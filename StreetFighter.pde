@@ -12,8 +12,8 @@ PVector Player1StartPos = new PVector(0, 0);
 PVector Player2StartPos = new PVector(0, 0);
 int charOnePoints;
 int charTwoPoints;
-int charOneOgHP = 0;
-int charTwoOgHP = 0;
+float charOneOgHP = 0;
+float charTwoOgHP = 0;
 Characters charOne, charTwo;
 SoundFile selectionAudio;
 SoundFile battleAudio;
@@ -89,14 +89,13 @@ void draw()
     curAudio = battleAudio;
     playAudio();
     image(map, 0, 0);
-    //if (! charOneAttackState )
-    //{
-    //  image(charOne.sprite, charOne.pos.x, charOne.pos.y);
-    //}
+    fill(0, 255, 0);
+    rect(0, 20,  400 * (charOne.hp / charOneOgHP), 20);
+    rect(1152 - (400 * (charTwo.hp / charTwoOgHP)), 20, 400 * (charTwo.hp / charTwoOgHP), 20);
+    
     if (charOneAttackState && curTime >= charOneNextAvaliable)
     {
       attackAudio.play();
-      image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + 625;
       if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x)

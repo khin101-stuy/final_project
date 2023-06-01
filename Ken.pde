@@ -4,7 +4,7 @@ public class Ken extends Characters
   {
     super();
     speed = 1;  // default 20 walkspeed
-    hp = 100;
+    hp = 100.0;
     damage = 25;
     stamina = 100;
     sprite = loadImage("ken.png");

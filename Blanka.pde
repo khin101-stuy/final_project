@@ -4,7 +4,7 @@ public class Blanka extends Characters
   {
     super();
     speed = 0.7;
-    hp = 200;
+    hp = 200.0;
     damage = 40;
     stamina = 75;
     sprite = loadImage("blanka.png");
