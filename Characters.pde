@@ -6,6 +6,7 @@ public class Characters
   public int stamina;
   public PVector pos;
   public PImage sprite;
+  public PImage spriteMirror;
   public PImage attack;
   public Characters()
   {
@@ -17,26 +18,26 @@ public class Characters
   }
   void moveLeft()
   {
-    if (0 < pos.x - 15*speed/frameRate)
-    pos.add(-15 * speed, 0);
+    if (0 < pos.x - 7.5*speed/frameRate)
+    pos.add(-7.5 * speed, 0);
   }
   void moveRight()
   {
-    if (width > pos.x + sprite.width + 15*speed/frameRate)
-    pos.add(15 * speed, 0);
+    if (width > pos.x + sprite.width + 7.5*speed/frameRate)
+    pos.add(7.5 * speed, 0);
   }
   void moveUp()
   {
-    if (587 - sprite.height  < pos.y -  15*speed / frameRate)
+    if (587 - sprite.height  < pos.y -  7.5*speed / frameRate)
       {
-        pos.add(0, -15 * speed);
+        pos.add(0, -7.5 * speed);
       }
   }
   void moveDown()
   {
-    if (height - sprite.height > pos.y + 15*speed / frameRate)
+    if (height - sprite.height > pos.y + 7.5*speed / frameRate)
      {
-        pos.add(0, 15 * speed);
+        pos.add(0, 7.5 * speed);
      }
   }
   

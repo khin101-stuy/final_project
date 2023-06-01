@@ -9,23 +9,27 @@ String selectedChar1 = "";
 String selectedChar2 = "";
 PVector Player1StartPos = new PVector(0, 0);
 PVector Player2StartPos = new PVector(0, 0);
+int charOnePoints;
+int charTwoPoints;
+int charOneOgHP = 0;
+int charTwoOgHP = 0;
 Characters charOne, charTwo;
 
 // handle the loading of sprites and backgrounds and what characters to be selected
 void setup()
 {
   curPlayerSelect = 1;
-  frameRate(30);
+  frameRate(60);
   size(384*3, 224*3);
   menu = loadImage("menu.png");
   menu.resize(384*3, 224*3);
   map = loadImage("map.png");
   map.resize(384*3, 224*3);
 
-  KenSelect = loadImage("sprite1.png");
+  KenSelect = loadImage("ken.png");
   KenSelect.resize(KenSelect.width * 2, KenSelect.height * 2);
 
-  BlankaSelect = loadImage("Screen_Shot_2023-05-25_at_12.47.21_PM-removebg-preview.png");
+  BlankaSelect = loadImage("blanka.png");
   BlankaSelect.resize(BlankaSelect.width / 2, BlankaSelect.height / 2);
 }
 
@@ -38,7 +42,7 @@ long charTwoNextAvaliable = 0;
 void draw()
 {
   long curTime = System.currentTimeMillis();
-//  System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
+  //  System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
   if (menuScreen == true)
   {
 
@@ -67,40 +71,62 @@ void draw()
       image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + 625;
-      if(charOne.pos.x + charOne.attack.width >= charTwo.pos.x)
+      if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x)
       {
         charTwo.hp += (-1 * charOne.damage);
-        System.out.println(charTwo.hp);
+        System.out.println("Player Two HP:" + charTwo.hp);
       }
-      
-    }
-    else 
+    } else
     {
-      if(curTime < charOneNextAvaliable - 500)
-      {image(charOne.attack, charOne.pos.x, charOne.pos.y);
-      }
-      else 
-      image(charOne.sprite, charOne.pos.x, charOne.pos.y);
+      if (curTime < charOneNextAvaliable - 500)
+      {
+        image(charOne.attack, charOne.pos.x, charOne.pos.y);
+      } else
+        image(charOne.sprite, charOne.pos.x, charOne.pos.y);
     }
-    
+
     if (charTwoAttackState && curTime >= charTwoNextAvaliable)
     {
       image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
       charTwoNextAvaliable = curTime + 625;
-      if(charTwo.pos.x + charTwo.attack.width >= charTwo.pos.x)
+      if (charTwo.pos.x + charTwo.attack.width >= charTwo.pos.x)
       {
         charOne.hp += (-1 * charTwo.damage);
-        System.out.println(charTwo.hp);
+        System.out.println("Player One HP:" + charOne.hp);
       }
-      
-    }
-    else 
+    } else
     {
-      if(curTime < charTwoNextAvaliable - 500)
-      {image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+      if (curTime < charTwoNextAvaliable - 500)
+      {
+        image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+      } else
+        image(charTwo.spriteMirror, charTwo.pos.x, charTwo.pos.y);
+
+      // hp triggers
+      if (charOne.hp <= 0)
+      {
+        charTwoPoints += 1;
+        charOne.pos.set(0, 587 - charOne.sprite.height);
+        charTwo.pos.set(width - charTwo.sprite.width, 587 - charTwo.sprite.height);
+        charOne.hp = charOneOgHP;
+        charTwo.hp = charTwoOgHP;
       }
-      else 
-      image(charTwo.sprite, charTwo.pos.x, charTwo.pos.y);
+      if (charTwo.hp <= 0)
+      {
+        charOnePoints += 1;
+        charOne.pos.set(0, 587 - charOne.sprite.height);
+        charTwo.pos.set(width - charTwo.sprite.width, 587 - charTwo.sprite.height);
+        charOne.hp = charOneOgHP;
+        charTwo.hp = charTwoOgHP;
+      }
+    }
+    if (charOnePoints == 3)
+    {
+      // win code here
+    }
+    if (charTwoPoints == 3)
+    {
+      // win code here
     }
 
     // movement vector handling
@@ -137,8 +163,8 @@ void draw()
     {
       charTwo.moveRight();
     }
-    }
   }
+}
 
 // handle then control scheme
 Boolean left = false, right = false, up = false, down = false, w = false, s = false, a = false, d = false;
@@ -190,11 +216,11 @@ void keyPressed() {
     {
       charOneAttackState = true;
     }
-  
-   if (key == '.')
-   {
-     charTwoAttackState = true;
-   }
+
+    if (key == '.')
+    {
+      charTwoAttackState = true;
+    }
   }
 }
 
@@ -210,6 +236,7 @@ void mousePressed() // this will be used to detect which character is selected
         selectedChar1 = "Ken";
         charOne = new Ken(Player1StartPos);
         charOne.pos.set(0, 587 - charOne.sprite.height);
+        charOneOgHP = charOne.hp;
         curPlayerSelect = 2;
       }
       if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256)
@@ -218,6 +245,7 @@ void mousePressed() // this will be used to detect which character is selected
         charOne = new Blanka(Player1StartPos);
         charOne.pos.set(0, 587 - charOne.sprite.height);
         curPlayerSelect = 2;
+        charOneOgHP = charOne.hp;
       }
     }
     if (curPlayerSelect == 2)
@@ -228,6 +256,7 @@ void mousePressed() // this will be used to detect which character is selected
         selectedChar2 = "Ken";
         charTwo = new Ken(Player2StartPos);
         charTwo.pos.set(width - charTwo.sprite.width, 587 - charTwo.sprite.height);
+        charTwoOgHP = charTwo.hp;
         battle = true;
       }
       if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256 && noDupeSelect)
@@ -236,6 +265,7 @@ void mousePressed() // this will be used to detect which character is selected
         selectedChar2 = "Blanka";
         charTwo = new Blanka(Player2StartPos);
         charTwo.pos.set(width - charTwo.sprite.width, 587 - charTwo.sprite.height);
+        charTwoOgHP = charTwo.hp;
         battle = true;
       }
     }
