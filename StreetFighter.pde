@@ -18,6 +18,8 @@ Characters charOne, charTwo;
 SoundFile selectionAudio;
 SoundFile battleAudio;
 SoundFile curAudio;
+SoundFile attackAudio;
+SoundFile impact;
 // handle the loading of sprites and backgrounds and what characters to be selected
 PFont font;
 void setup()
@@ -38,7 +40,9 @@ void setup()
   BlankaSelect.resize(BlankaSelect.width, BlankaSelect.height);
   selectionAudio =  new SoundFile(this, "charselectaudio.mp3");
   battleAudio = new SoundFile(this, "battleaudio.mp3");
-
+  battleAudio.amp(0.7);
+  attackAudio = new SoundFile(this, "attackaudio.wav");
+  impact = new SoundFile(this, "impact.wav");
 }
 SoundFile temp;
 void playAudio()
@@ -47,7 +51,7 @@ void playAudio()
   {
     if (temp != null)
     {
-    temp.stop();
+      temp.stop();
     }
     curAudio.play();
     temp = curAudio;
@@ -91,11 +95,13 @@ void draw()
     //}
     if (charOneAttackState && curTime >= charOneNextAvaliable)
     {
+      attackAudio.play();
       image(map, 0, 0);
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + 625;
       if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x)
       {
+        impact.play();
         charTwo.hp += (-1 * charOne.damage);
         System.out.println("Player Two HP:" + charTwo.hp);
       }
@@ -110,10 +116,12 @@ void draw()
 
     if (charTwoAttackState && curTime >= charTwoNextAvaliable)
     {
+      attackAudio.play();
       image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       charTwoNextAvaliable = curTime + 625;
       if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width)
       {
+        impact.play();
         charOne.hp += (-1 * charTwo.damage);
         System.out.println("Player One HP:" + charOne.hp);
       }
