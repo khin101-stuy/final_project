@@ -6,6 +6,8 @@ PImage menu;
 PImage KenSelect, BlankaSelect, idkSelect;
 boolean menuScreen = true;
 boolean battle = false;
+String selectedChar1 = "";
+String selectedChar2 = "";
 PVector Player1StartPos = new PVector(0, 0);
 PVector Player2StartPos = new PVector(0, 0);
 int charOnePoints;
