@@ -3,9 +3,9 @@ public class Blanka extends Characters
   public Blanka()
   {
     super();
-    speed = 0.7;
-    hp = 200.0;
-    damage = 40;
+    speed = 0.6;
+    hp = 125.0;
+    damage = 27;
     stamina = 75;
     sprite = loadImage("blanka.png");
     sprite.resize(sprite.width * 4 / 5, sprite.height * 4 / 5);
@@ -18,9 +18,9 @@ public class Blanka extends Characters
   public Blanka(PVector position)
   {
     super();
-    speed = 0.7;
-    hp = 200;
-    damage = 40;
+    speed = 0.6;
+    hp = 125.0;
+    damage = 27;
     stamina = 75;
     sprite = loadImage("blanka.png");
     sprite.resize((sprite.width * 4) / 5, sprite.height * 4 / 5);
