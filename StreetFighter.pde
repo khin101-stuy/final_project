@@ -98,7 +98,7 @@ void draw()
       attackAudio.play();
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + 625;
-      if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x)
+      if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x  && charOne.pos.x + charOne.attack.width <= charTwo.pos.x + charTwo.sprite.width)
       {
         impact.play();
         charTwo.hp += (-1 * charOne.damage);
@@ -118,7 +118,7 @@ void draw()
       attackAudio.play();
       image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       charTwoNextAvaliable = curTime + 625;
-      if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width)
+      if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width && charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) >= charOne.pos.x)
       {
         impact.play();
         charOne.hp += (-1 * charTwo.damage);
