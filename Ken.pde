@@ -13,6 +13,9 @@ public class Ken extends Characters
     attack.resize(attack.width * 3, attack.height * 3);
     spriteMirror = loadImage("kenmirrored.png");
     spriteMirror.resize(spriteMirror.width * 3, spriteMirror.height * 3);
+    attackMirror = loadImage("Kenattackmirrored.png");
+    attackMirror.resize(attackMirror.width * 3, attackMirror.height * 3);
+    mugshot = loadImage("kenmugshot.png");
   }
   public Ken(PVector position)
   {
@@ -28,5 +31,8 @@ public class Ken extends Characters
     attack.resize(attack.width * 3, attack.height * 3);
     spriteMirror = loadImage("kenmirrored.png");
     spriteMirror.resize(spriteMirror.width * 3, spriteMirror.height * 3);
+    attackMirror = loadImage("Kenattackmirrored.png");
+    attackMirror.resize(attackMirror.width * 3, attackMirror.height * 3);
+    mugshot = loadImage("kenmugshot.png");
   }
 }

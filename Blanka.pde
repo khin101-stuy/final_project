@@ -9,8 +9,11 @@ public class Blanka extends Characters
     stamina = 75;
     sprite = loadImage("blanka.png");
     sprite.resize(sprite.width * 4 / 5, sprite.height * 4 / 5);
-    attack = loadImage("Screen_Shot_2023-05-25_at_12.47.46_PM-removebg-preview.png");
+    attack = loadImage("blankattack.png");
     attack.resize(attack.width * 4 / 5, attack.height * 4 / 5);
+    spriteMirror = loadImage("blankamirrored.png");
+    spriteMirror.resize(spriteMirror.width * 4/5, spriteMirror.height * 4 / 5);
+    mugshot = loadImage("blankamugshot.png");
   }
   public Blanka(PVector position)
   {
@@ -22,7 +25,12 @@ public class Blanka extends Characters
     sprite = loadImage("blanka.png");
     sprite.resize((sprite.width * 4) / 5, sprite.height * 4 / 5);
     pos = position;
-    attack = loadImage("Screen_Shot_2023-05-25_at_12.47.46_PM-removebg-preview.png");
+    attack = loadImage("blankattack.png");
     attack.resize((attack.width * 4) / 5, attack.height * 4 / 5);
+    spriteMirror = loadImage("blankamirrored.png");
+    spriteMirror.resize(spriteMirror.width * 4/5, spriteMirror.height * 4 / 5);
+    attackMirror = loadImage("blankattackmirrored.png");
+    attackMirror.resize(attackMirror.width *4/5, spriteMirror.height);
+    mugshot = loadImage("blankamugshot.png");
   }
 }

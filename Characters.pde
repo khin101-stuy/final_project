@@ -8,6 +8,8 @@ public class Characters
   public PImage sprite;
   public PImage spriteMirror;
   public PImage attack;
+  public PImage attackMirror;
+  public PImage mugshot;
   public Characters()
   {
     int speed;

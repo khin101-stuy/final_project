@@ -1,12 +1,11 @@
 import java.util.concurrent.TimeUnit;
+import processing.sound.*;
 PImage map;
 PImage char1;
 PImage menu;
 PImage KenSelect, BlankaSelect, idkSelect;
 boolean menuScreen = true;
 boolean battle = false;
-String selectedChar1 = "";
-String selectedChar2 = "";
 PVector Player1StartPos = new PVector(0, 0);
 PVector Player2StartPos = new PVector(0, 0);
 int charOnePoints;
@@ -14,10 +13,15 @@ int charTwoPoints;
 int charOneOgHP = 0;
 int charTwoOgHP = 0;
 Characters charOne, charTwo;
-
+SoundFile selectionAudio;
+SoundFile battleAudio;
+SoundFile curAudio;
 // handle the loading of sprites and backgrounds and what characters to be selected
+PFont font;
 void setup()
 {
+  font =  createFont("Act_Of_Rejection.ttf", 100);
+  textFont(font);
   curPlayerSelect = 1;
   frameRate(60);
   size(384*3, 224*3);
@@ -27,12 +31,26 @@ void setup()
   map.resize(384*3, 224*3);
 
   KenSelect = loadImage("ken.png");
-  KenSelect.resize(KenSelect.width * 2, KenSelect.height * 2);
-
+  KenSelect.resize(KenSelect.width * 4, KenSelect.height * 4);
   BlankaSelect = loadImage("blanka.png");
-  BlankaSelect.resize(BlankaSelect.width / 2, BlankaSelect.height / 2);
-}
+  BlankaSelect.resize(BlankaSelect.width, BlankaSelect.height);
+  selectionAudio =  new SoundFile(this, "charselectaudio.mp3");
+  battleAudio = new SoundFile(this, "battleaudio.mp3");
 
+}
+SoundFile temp;
+void playAudio()
+{
+  if (! (temp == curAudio))
+  {
+    if (temp != null)
+    {
+    temp.stop();
+    }
+    curAudio.play();
+    temp = curAudio;
+  }
+}
 
 // handle the drawing of the characters their attacks, and the ui
 boolean charOneAttackState = false;
@@ -42,10 +60,10 @@ long charTwoNextAvaliable = 0;
 void draw()
 {
   long curTime = System.currentTimeMillis();
-  //  System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
+  // System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
   if (menuScreen == true)
   {
-
+    playAudio();
     image(menu, 0, 0);
     textSize(100);
     text("Press any key!", width/4, 600);
@@ -53,14 +71,17 @@ void draw()
 
   if (menuScreen == false && battle == false)    // handle character pos, attacks, ui
   {
+    curAudio = selectionAudio;
+    playAudio();
     background(0, 0, 0);
-    rect(20, 195-KenSelect.height, KenSelect.width + 20, KenSelect.height+20);
-    image(KenSelect, 30, 205-KenSelect.height);
-    image(BlankaSelect, 200, 205-BlankaSelect.height);
+    image(KenSelect, 30, 405-KenSelect.height);
+    image(BlankaSelect, 300, 405-BlankaSelect.height);
     text("Choose your character!", width/8, 600);
   }
   if (battle)
   {
+    curAudio = battleAudio;
+    playAudio();
     image(map, 0, 0);
     //if (! charOneAttackState )
     //{
@@ -87,9 +108,9 @@ void draw()
 
     if (charTwoAttackState && curTime >= charTwoNextAvaliable)
     {
-      image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+      image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       charTwoNextAvaliable = curTime + 625;
-      if (charTwo.pos.x + charTwo.attack.width >= charTwo.pos.x)
+      if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width)
       {
         charOne.hp += (-1 * charTwo.damage);
         System.out.println("Player One HP:" + charOne.hp);
@@ -98,7 +119,7 @@ void draw()
     {
       if (curTime < charTwoNextAvaliable - 500)
       {
-        image(charTwo.attack, charTwo.pos.x, charTwo.pos.y);
+        image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       } else
         image(charTwo.spriteMirror, charTwo.pos.x, charTwo.pos.y);
 
@@ -231,7 +252,7 @@ void mousePressed() // this will be used to detect which character is selected
   {
     if (curPlayerSelect == 1)
     {
-      if (mouseX > 0 && mouseX < 256 && mouseY > 0 && mouseY < 256)
+      if (mouseX >= 39 && mouseX < 180 && mouseY > 86 && mouseY < 404)
       {
         selectedChar1 = "Ken";
         charOne = new Ken(Player1StartPos);
@@ -239,7 +260,7 @@ void mousePressed() // this will be used to detect which character is selected
         charOneOgHP = charOne.hp;
         curPlayerSelect = 2;
       }
-      if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256)
+      if (mouseX > 303 && mouseX < 533 && mouseY > 45 && mouseY < 404)
       {
         selectedChar1 = "Blanka";
         charOne = new Blanka(Player1StartPos);
@@ -250,7 +271,7 @@ void mousePressed() // this will be used to detect which character is selected
     }
     if (curPlayerSelect == 2)
     {
-      if (mouseX > 0 && mouseX < 256 && mouseY > 0 && mouseY < 256 && noDupeSelect)
+      if (mouseX >= 39 && mouseX < 180 && mouseY > 86 && mouseY < 404 && noDupeSelect)
       {
         noDupeSelect  = false;
         selectedChar2 = "Ken";
@@ -259,7 +280,7 @@ void mousePressed() // this will be used to detect which character is selected
         charTwoOgHP = charTwo.hp;
         battle = true;
       }
-      if (mouseX > 155 && mouseX < 310 && mouseY > 0 && mouseY < 256 && noDupeSelect)
+      if (mouseX > 303 && mouseX < 533 && mouseY > 45 && mouseY < 404 && noDupeSelect)
       {
         noDupeSelect  = false;
         selectedChar2 = "Blanka";
