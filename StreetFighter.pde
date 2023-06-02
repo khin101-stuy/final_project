@@ -68,7 +68,7 @@ long charTwoAnimationTime = 0;
 void draw()
 {
   long curTime = System.currentTimeMillis();
-  // System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
+   System.out.println("x-cord:" + mouseX + " " + "y-cord:" + mouseY); // debug cords
   if (menuScreen == true)
   {
     playAudio();
@@ -100,7 +100,7 @@ void draw()
       attackAudio.play();
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + (long)(625 * (1.0/ charOne.speed));
-      charOneAnimationTime = curTime + 125;
+      charOneAnimationTime = curTime + 175;
       if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x  && charOne.pos.x  <= charTwo.pos.x )
       {
         impact.play();
@@ -121,7 +121,7 @@ void draw()
       attackAudio.play();
       image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       charTwoNextAvaliable = curTime + (long)(625 * (1.0/ charTwo.speed));
-      charTwoAnimationTime = curTime + 125;
+      charTwoAnimationTime = curTime + 175;
       if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width && charTwo.pos.x  >= charOne.pos.x)
       {
         impact.play();
@@ -153,6 +153,10 @@ void draw()
         charOne.hp = charOneOgHP;
         charTwo.hp = charTwoOgHP;
       }
+      fill(255,165,0);
+      textSize(100);
+      text(charOnePoints, 465, 80);
+      text(charTwoPoints, 665, 80);
     }
     if (charOnePoints == 3)
     {
