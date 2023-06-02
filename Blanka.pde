@@ -31,6 +31,6 @@ public class Blanka extends Characters
     attackMirror.resize(attackMirror.width *4/5, spriteMirror.height);
     mugshot = loadImage("blankamugshot.png");
     winPose = loadImage("blankawinpose.png");
-    winPose.resize(sprite.width, sprite.height);
+    winPose.resize(winPose.width*2, winPose.height*2);
   }
 }
