@@ -166,13 +166,13 @@ void draw()
     {
       image(endScreen, 0, 0);
       text("P1 WINS", width/2-150,height/2);
-      image(charOne.winPose, width/2, height/2 + 50);
+      image(charOne.winPose, width/2-30, height/2 + 50);
     }
     if (charTwoPoints == 3)
     {
       image(endScreen, 0, 0);
       text("P2 WINS", width/2-100,height/2);
-      image(charTwo.winPose, width/2, height/2 + 50);
+      image(charTwo.winPose, width/2-30, height/2 + 50);
     }
 
     // movement vector handling
