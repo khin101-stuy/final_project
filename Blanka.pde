@@ -6,7 +6,6 @@ public class Blanka extends Characters
     speed = 0.6;
     hp = 125.0;
     damage = 27;
-    stamina = 75;
     sprite = loadImage("blanka.png");
     sprite.resize(sprite.width * 4 / 5, sprite.height * 4 / 5);
     attack = loadImage("blankattack.png");
@@ -21,7 +20,6 @@ public class Blanka extends Characters
     speed = 0.6;
     hp = 125.0;
     damage = 27;
-    stamina = 75;
     sprite = loadImage("blanka.png");
     sprite.resize((sprite.width * 4) / 5, sprite.height * 4 / 5);
     pos = position;
@@ -32,5 +30,7 @@ public class Blanka extends Characters
     attackMirror = loadImage("blankattackmirrored.png");
     attackMirror.resize(attackMirror.width *4/5, spriteMirror.height);
     mugshot = loadImage("blankamugshot.png");
+    winPose = loadImage("blankawinpose.png");
+    winPose.resize(sprite.width, sprite.height);
   }
 }

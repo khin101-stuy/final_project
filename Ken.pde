@@ -6,7 +6,6 @@ public class Ken extends Characters
     speed = 1;  // default 20 walkspeed
     hp = 100.0;
     damage = 25;
-    stamina = 100;
     sprite = loadImage("ken.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
     attack = loadImage("Kenattack.png");
@@ -23,7 +22,6 @@ public class Ken extends Characters
     speed = 1;
     hp = 100;
     damage = 25;
-    stamina = 100;
     sprite = loadImage("ken.png");
     sprite.resize(sprite.width * 3, sprite.height * 3);
     pos = position;
@@ -34,5 +32,7 @@ public class Ken extends Characters
     attackMirror = loadImage("Kenattackmirrored.png");
     attackMirror.resize(attackMirror.width * 3, attackMirror.height * 3);
     mugshot = loadImage("kenmugshot.png");
+    winPose = loadImage("kenwinpose.png");
+    winPose.resize(sprite.width, sprite.height);
   }
 }

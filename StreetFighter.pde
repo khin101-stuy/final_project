@@ -3,6 +3,7 @@ import processing.sound.*;
 PImage map;
 PImage char1;
 PImage menu;
+PImage endScreen;
 PImage KenSelect, BlankaSelect, idkSelect;
 boolean menuScreen = true;
 boolean battle = false;
@@ -14,6 +15,7 @@ int charOnePoints;
 int charTwoPoints;
 float charOneOgHP = 0;
 float charTwoOgHP = 0;
+
 Characters charOne, charTwo;
 SoundFile selectionAudio;
 SoundFile battleAudio;
@@ -33,7 +35,8 @@ void setup()
   menu.resize(384*3, 224*3);
   map = loadImage("map.png");
   map.resize(384*3, 224*3);
-
+  endScreen = loadImage("menublur.png");
+  endScreen.resize(384*3, 224*3);
   KenSelect = loadImage("ken.png");
   KenSelect.resize(KenSelect.width * 4, KenSelect.height * 4);
   BlankaSelect = loadImage("blanka.png");
@@ -53,7 +56,7 @@ void playAudio()
     {
       temp.stop();
     }
-    curAudio.play();
+    curAudio.loop();
     temp = curAudio;
   }
 }
@@ -153,6 +156,7 @@ void draw()
         charOne.hp = charOneOgHP;
         charTwo.hp = charTwoOgHP;
       }
+      // display score
       fill(255,165,0);
       textSize(100);
       text(charOnePoints, 465, 80);
@@ -160,11 +164,15 @@ void draw()
     }
     if (charOnePoints == 3)
     {
-      // win code here
+      image(endScreen, 0, 0);
+      text("P1 WINS", width/2-150,height/2);
+      image(charOne.winPose, width/2, height/2 + 50);
     }
     if (charTwoPoints == 3)
     {
-      // win code here
+      image(endScreen, 0, 0);
+      text("P2 WINS", width/2-100,height/2);
+      image(charTwo.winPose, width/2, height/2 + 50);
     }
 
     // movement vector handling

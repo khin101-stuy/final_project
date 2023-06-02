@@ -3,19 +3,18 @@ public class Characters
   public float speed;
   public float hp;
   public int damage;
-  public int stamina;
   public PVector pos;
   public PImage sprite;
   public PImage spriteMirror;
   public PImage attack;
   public PImage attackMirror;
   public PImage mugshot;
+  public PImage winPose;
   public Characters()
   {
     int speed;
     int hp;
     int damage;
-    int stamina;
     int pos;
   }
   void moveLeft()
