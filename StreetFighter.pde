@@ -63,6 +63,8 @@ boolean charOneAttackState = false;
 boolean charTwoAttackState = false;
 long charOneNextAvaliable = 0;
 long charTwoNextAvaliable = 0;
+long charOneAnimationTime = 0;
+long charTwoAnimationTime = 0;
 void draw()
 {
   long curTime = System.currentTimeMillis();
@@ -98,6 +100,7 @@ void draw()
       attackAudio.play();
       image(charOne.attack, charOne.pos.x, charOne.pos.y);
       charOneNextAvaliable = curTime + (long)(625 * (1.0/ charOne.speed));
+      charOneAnimationTime = curTime + 125;
       if (charOne.pos.x + charOne.attack.width >= charTwo.pos.x  && charOne.pos.x  <= charTwo.pos.x )
       {
         impact.play();
@@ -106,7 +109,7 @@ void draw()
       }
     } else
     {
-      if (curTime < charOneNextAvaliable - 500)
+      if (curTime < charOneAnimationTime)
       {
         image(charOne.attack, charOne.pos.x, charOne.pos.y);
       } else
@@ -118,6 +121,7 @@ void draw()
       attackAudio.play();
       image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       charTwoNextAvaliable = curTime + (long)(625 * (1.0/ charTwo.speed));
+      charTwoAnimationTime = curTime + 125;
       if (charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width) <= charOne.pos.x + charOne.sprite.width && charTwo.pos.x  >= charOne.pos.x)
       {
         impact.play();
@@ -126,7 +130,7 @@ void draw()
       }
     } else
     {
-      if (curTime < charTwoNextAvaliable - 500)
+      if (curTime < charTwoAnimationTime)
       {
         image(charTwo.attackMirror, charTwo.pos.x - (charTwo.attack.width - charTwo.sprite.width), charTwo.pos.y);
       } else
