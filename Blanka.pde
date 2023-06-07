@@ -1,4 +1,5 @@
 public class Blanka extends Characters
+//blanka is slower than jake, and has more attack power and more health points
 {
   public Blanka()
   {
